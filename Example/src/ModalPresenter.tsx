@@ -1,11 +1,6 @@
-import React, {
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
-  useRef,
-} from "react";
-import { Animated, StyleSheet, View, ViewProps } from "react-native";
-import RootSiblings, { RootSiblingParent } from "react-native-root-siblings";
+import React, {forwardRef, useEffect, useImperativeHandle, useRef} from 'react';
+import {Animated, StyleSheet, View, ViewProps} from 'react-native';
+import RootSiblings, {RootSiblingParent} from 'react-native-root-siblings';
 
 export type ModalContentProps = {
   dismiss: () => void;
@@ -32,7 +27,7 @@ export const showModal = <ContentProps,>(
   };
   rootSiblings = new RootSiblings(
     (
-      <ModalPresenter ref={(_ref) => (ref = _ref)}>
+      <ModalPresenter ref={_ref => (ref = _ref)}>
         <Content {...contentProps} dismiss={dismiss} />
       </ModalPresenter>
     ),
@@ -47,7 +42,7 @@ type Ref = {
 };
 
 const ModalPresenter = forwardRef<Ref, ViewProps>(
-  ({ style, children, ...props }, ref) => {
+  ({style, children, ...props}, ref) => {
     const animatedOpacity = useRef(new Animated.Value(0));
 
     useEffect(() => {
@@ -71,13 +66,8 @@ const ModalPresenter = forwardRef<Ref, ViewProps>(
     return (
       <View style={StyleSheet.absoluteFill}>
         <Animated.View
-          style={[
-            styles.container,
-            { opacity: animatedOpacity.current },
-            style,
-          ]}
-          {...props}
-        >
+          style={[styles.container, {opacity: animatedOpacity.current}, style]}
+          {...props}>
           {children}
         </Animated.View>
       </View>
@@ -85,7 +75,7 @@ const ModalPresenter = forwardRef<Ref, ViewProps>(
   },
 );
 
-const ModalPresenterWrapper: React.FC<ViewProps> = ({ children }) => {
+const ModalPresenterWrapper: React.FC<ViewProps> = ({children}) => {
   return <RootSiblingParent>{children}</RootSiblingParent>;
 };
 
@@ -93,10 +83,10 @@ export default ModalPresenterWrapper;
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
-    height: "100%",
-    backgroundColor: "rgba(21, 24, 25, 0.8)",
-    justifyContent: "center",
-    alignItems: "center",
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(21, 24, 25, 0.8)',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
