@@ -20,6 +20,9 @@
     "rn",
     "react-native"
   ],
+  "dependencies": {
+    "react-native-root-siblings": "^4.1.1"
+  },
   "peerDependencies": {
     "react": ">= 16.x.x",
     "react-native": ">=0.63.x"
@@ -45,11 +48,6 @@
     "lint": "tslint -p tsconfig.json",
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags",
-    "prettier": "cd lib && npx prettier --write . && git add .",
-    "prepare": "husky install",
-    "husky:setup": "npx husky-init && npm run husky:commitlint && npm run husky:prettier && npm run husky:lint",
-    "husky:commitlint": "npx husky add .husky/commit-msg 'npx --no-install commitlint --edit'",
-    "husky:prettier": "npx husky set .husky/pre-commit 'npm run prettier'",
-    "husky:lint": "npx husky add .husky/pre-commit 'npm run lint'"
+    "prettier": "cd lib && npx prettier --write . && git add ."
   }
 }
