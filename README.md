@@ -10,21 +10,18 @@ or
 yarn add rn-modal-presenter
 ```
 
-## Peer Dependencies
-
-<h5><i>IMPORTANT! You need install them</i></h5>
-
-```js
-"react": ">= 16.x.x",
-"react-native": ">= 0.55.x",
-```
-
 # Usage
 
-## Import
+To use this component you need to do two things:
+# Import the `ModalPresenterParent` component and wrap your app with it
+# Implement
 
 ```jsx
-import MyComponent from "rn-modal-presenter";
+import { ModalPresenterParent } from "rn-modal-presenter";
+...
+<ModalPresenterParent>
+  <App />
+</ModalPresenterParent>
 ```
 
 ## Fundamental Usage
