@@ -134,17 +134,17 @@ This custom alert example can be found under the `Example` project in this repo.
 Simply go to the `Example` folder and run
 
 ```bash
-`npm i`
-`react-native run-ios/android`
+npm i
+react-native run-ios/android
 ```
 
 to see it in action.
 
 ## Authors
 
-Rui Lu, rui@whitespectre.com
-Lucas Diez de Medina, lucas@whitespectre.com
+- Rui Lu, rui@whitespectre.com
+- Lucas Diez de Medina, lucas@whitespectre.com
 
 ## License
 
-`rn-modal-presenter` is available under the MIT license. See the LICENSE file for more info.
+`rn-modal-presenter` is available under the MIT license. See the [LICENSE](LICENSE.md) file for more info.
