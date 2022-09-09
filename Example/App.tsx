@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, SafeAreaView, StyleSheet} from 'react-native';
 import {showCustomAlert} from './src/CustomAlert';
-import ModalPresenterWrapper from 'rn-modal-presenter';
+import {ModalPresenterParent} from 'rn-modal-presenter';
 
 const App = () => {
   const showAlertFromAlert = () => {
@@ -24,7 +24,7 @@ const App = () => {
   };
 
   return (
-    <ModalPresenterWrapper>
+    <ModalPresenterParent>
       <SafeAreaView style={styles.container}>
         <Button
           title="Show Modal"
@@ -48,7 +48,7 @@ const App = () => {
           }}
         />
       </SafeAreaView>
-    </ModalPresenterWrapper>
+    </ModalPresenterParent>
   );
 };
 

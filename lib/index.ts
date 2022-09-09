@@ -1,8 +1,8 @@
-import ModalPresenterWrapper, {
+import {
+  ModalPresenterParent,
   ModalContentProps,
   ModalHandler,
   showModal,
 } from "./ModalPresenter";
 export type { ModalContentProps, ModalHandler };
-export default ModalPresenterWrapper;
-export { showModal };
+export { ModalPresenterParent, showModal };
