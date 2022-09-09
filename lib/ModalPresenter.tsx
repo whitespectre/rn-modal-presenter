@@ -3,6 +3,7 @@ import React, {
   useEffect,
   useImperativeHandle,
   useRef,
+  FC,
 } from "react";
 import { Animated, StyleSheet, View, ViewProps } from "react-native";
 import RootSiblings, { RootSiblingParent } from "react-native-root-siblings";
@@ -85,11 +86,9 @@ const ModalPresenter = forwardRef<Ref, ViewProps>(
   },
 );
 
-const ModalPresenterWrapper: React.FC<ViewProps> = ({ children }) => {
+export const ModalPresenterParent: FC<{}> = ({ children }) => {
   return <RootSiblingParent>{children}</RootSiblingParent>;
 };
-
-export default ModalPresenterWrapper;
 
 const styles = StyleSheet.create({
   container: {
