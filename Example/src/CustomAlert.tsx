@@ -11,7 +11,6 @@ type CustomAlertProps = {
   title: string;
   body: string;
   buttons: CustomAlertButton[];
-  showCloseButton: boolean;
 };
 
 const defaultButton: CustomAlertButton = {title: 'Got It'};
