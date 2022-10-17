@@ -86,7 +86,9 @@ const ModalPresenter = forwardRef<Ref, ViewProps>(
   },
 );
 
-export const ModalPresenterParent: FC<{}> = ({ children }) => {
+export const ModalPresenterParent: FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   return <RootSiblingParent>{children}</RootSiblingParent>;
 };
 
