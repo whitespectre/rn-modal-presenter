@@ -5,6 +5,7 @@ import {
   showModal,
   enqueueModal,
   ModalOptions,
+  ModalDismissFunc,
 } from "./ModalPresenter";
 import {
   ModalQueue,
@@ -16,6 +17,7 @@ import {
 export type {
   ModalContentProps,
   ModalHandler,
+  ModalDismissFunc,
   ModalOptions,
   ModalQueuePriority,
   ModalQueueElement

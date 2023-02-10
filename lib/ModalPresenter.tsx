@@ -14,6 +14,8 @@ type ModalPresenterRef = {
   animatedOut: (completion?: () => void) => void;
 };
 
+export type ModalDismissFunc = (onDismiss?: () => void) => void;
+
 /**
  * Props provided by this libary to your modal component.
  */
@@ -21,7 +23,7 @@ export type ModalContentProps = {
   /**
    * Dismiss the modal imperatively. Calling this function again after the modal is dismissed has no effect.
    */
-  dismiss: (onDismiss?: () => void) => void;
+  dismiss: ModalDismissFunc;
 };
 
 /**
@@ -40,7 +42,7 @@ export type ModalOptions = {
   /**
    * Get notified when the modal is later dismissed.
    */
-  onDismiss?: () => void;
+  onDismiss?: ModalDismissFunc;
  } & Omit<ModalQueueElement, 'present'>;
 
 /**
@@ -73,20 +75,18 @@ export const showModal = <ContentProps,>(
   let rootSiblings: RootSiblings | null = null;
   const dismiss = (onDismiss?: () => void) => {
     if (rootSiblings) {
-      if (ref) {
-        // FIXME: set up a flag here to prevent multiple `dismiss` calls during the out animation.
-        ref.animatedOut(() => {
-          rootSiblings?.destroy();
-          rootSiblings = null;
-          ref = null;
-          onDismiss?.();
-        });
-      } else {
-        console.warn('Dismissing a modal without animation because ref has been lost.');
+      const cleanup = () => {
         rootSiblings?.destroy();
         rootSiblings = null;
         ref = null;
         onDismiss?.();
+      };
+      if (ref) {
+        // FIXME: set up a flag here to prevent multiple `dismiss` calls during the out animation.
+        ref.animatedOut(cleanup);
+      } else {
+        console.warn('Dismissing a modal without animation because ref has been lost.');
+        cleanup();
       }
     }
   };
@@ -131,23 +131,20 @@ export const enqueueModal = async <ContentProps,>(
 
     const dismiss = (onDismiss?: () => void) => {
       if (rootSiblings) {
-        if (ref) {
-          // FIXME: set up a flag here to prevent multiple `dismiss` calls during the out animation.
-          ref.animatedOut(() => {
-            rootSiblings?.destroy();
-            rootSiblings = null;
-            ref = null;
-            options?.onDismiss?.();
-            onDismissForQueue?.();
-            onDismiss?.();
-          });
-        } else {
-          console.warn('Dismissing a modal without animation because ref has been lost.');
-          rootSiblings.destroy();
+        const cleanup = () => {
+          rootSiblings?.destroy();
           rootSiblings = null;
+          ref = null;
           options?.onDismiss?.();
           onDismissForQueue?.();
           onDismiss?.();
+        };
+        if (ref) {
+          // FIXME: set up a flag here to prevent multiple `dismiss` calls during the out animation.
+          ref.animatedOut(cleanup);
+        } else {
+          console.warn('Dismissing a modal without animation because ref has been lost.');
+          cleanup();
         }
       }
     };
