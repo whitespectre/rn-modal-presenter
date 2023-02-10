@@ -3,6 +3,29 @@ import {
   ModalContentProps,
   ModalHandler,
   showModal,
+  enqueueModal,
+  ModalOptions,
+  ModalDismissFunc,
 } from "./ModalPresenter";
-export type { ModalContentProps, ModalHandler };
-export { ModalPresenterParent, showModal };
+import {
+  ModalQueue,
+  ModalQueuesManager,
+  ModalQueuePriority,
+  ModalQueueElement,
+} from './ModalQueue';
+
+export type {
+  ModalContentProps,
+  ModalHandler,
+  ModalDismissFunc,
+  ModalOptions,
+  ModalQueuePriority,
+  ModalQueueElement
+};
+export {
+  ModalPresenterParent,
+  showModal,
+  enqueueModal,
+  ModalQueue,
+  ModalQueuesManager
+};
