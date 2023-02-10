@@ -42,7 +42,7 @@ export type ModalOptions = {
   /**
    * Get notified when the modal is later dismissed.
    */
-  onDismiss?: ModalDismissFunc;
+  onDismiss?: () => void;
  } & Omit<ModalQueueElement, 'present'>;
 
 /**
@@ -52,7 +52,7 @@ export type ModalHandler = {
   /**
    * Same `dismiss` function as in `ModalContentProps`.
    */
-  dismiss: () => void;
+  dismiss: ModalDismissFunc;
 };
 
 /**
