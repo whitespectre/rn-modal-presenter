@@ -127,6 +127,43 @@ const CustomAlert = ({
 };
 ```
 
+### Presenting modals in a queue
+When you present a modal using `showModal` function, it presents it on top of other React-Native content on screen, including modals being presented by this library. If you don't want this modal stacking behavior, you can use another function `enqueueModal` to present modals in a queue, meaning that the next modal will only be presented when the current modal on screen is dismissed.
+
+The use of `enqueueModal` is similar to that of `showModal`. It receives the same two parameters:
+```jsx
+const handler = await enqueueModal(YourModalComponent, Props);
+...
+handler.dismiss();
+```
+However, instead of presenting the modal immediately, `enqueueModal` adds your modal to a queue. By default, modals will be added to the default queue managed by this library. The queue holds multiple modals to be presented and presents the next modal when the current modal is dismissed, in the same order you add them. 
+
+You might've noticed that `enqueueModal` is asynchronous and returns a `Promise` containing the same `ModalHandler` as `showModal`. This is because the modals in a queue will wait until the queue presents them, so if you want to continue your code after the modal is truly presented, or if you simply want to be notified about this, you'll need to `await` for `enqueueModal` to return or use `then` to get notified.
+
+You can also create your own modal queue(s) by specifying a `ModalOptions` to `enqueueModal`:
+```jsx
+const handler = await enqueueModal(YourModalComponent, Props, { queueName: 'my-queue1' });
+...
+handler.dismiss();
+```
+When you specify a `queueName`, this function creates a new queue for you and adds the modal to it. Your queues have no difference from the default queue, but creating different queues for different set of modals can be required depending on how you want your modals to appear. **Important: modals in a same queue will be presented one after one, but modals in a newer created queue will be presented on top of modals in a earlier created queue (if there's any).**
+
+The third parameter `ModalOptions` of `enqueueModal` provides other options for you to tweak how modals will be presented. For exmaple, you can specify a delay in milliseconds before the modal to be presented. You can specify a priority to the modal so it will be presented earlier or later than other modals in the same queue. You can also get notified when the modal is dismissed by providing a callback:
+```jsx
+const handler = await enqueueModal(YourModalComponent, Props, {
+  queueName: 'my-queue1',
+  delay: 2000,
+  priority: 'high',
+  onDismiss: () => {
+    // do something when this modal is dismissed.
+  },
+});
+...
+handler.dismiss();
+```
+
+For more details, please check the code documentation of each function and type.
+
 ## Example Project
 
 This custom alert example can be found under the `Example` project in this repo.
