@@ -134,16 +134,14 @@ export class ModalQueue {
    * This method waits for the modal to be dismissed before it returns.
    */
   pop = async () => {
-    if (this.isEmpty) {
-      return;
+    const modal = this.modals.shift();
+    if (modal) {
+      const finalDelay = Math.max(modal.delay ?? 0, this.minimumDelay);
+      if (finalDelay > 0) {
+        await (new Promise<void>(resolve => setTimeout(resolve, finalDelay)));
+      }
+      await (new Promise<void>(resolve => modal.present(resolve)));
     }
-    const modal = this.modals[0];
-    const finalDelay = Math.max(modal.delay ?? 0, this.minimumDelay);
-    if (finalDelay > 0) {
-      await (new Promise<void>(resolve => setTimeout(resolve, finalDelay)));
-    }
-    await (new Promise<void>(resolve => modal.present(resolve)));
-    this.modals.shift();
   };
 }
 
