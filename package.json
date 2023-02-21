@@ -1,6 +1,6 @@
 {
   "name": "@whitespectre/rn-modal-presenter",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A simple to use library to present modals on top of the app using Root Siblings.",
   "main": "./build/dist/index.js",
   "repository": "git@github.com:whitespectre/rn-modal-presenter.git",
@@ -48,6 +48,7 @@
     "lint": "tslint -p tsconfig.json",
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags",
-    "prettier": "cd lib && npx prettier --write . && git add ."
+    "prettier": "cd lib && npx prettier --write . && git add .",
+    "prepare": "npm run build"
   }
 }
