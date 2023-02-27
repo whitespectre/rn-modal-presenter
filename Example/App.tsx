@@ -4,8 +4,8 @@ import {showCustomAlert} from './src/CustomAlert';
 import {ModalPresenterParent} from 'rn-modal-presenter';
 
 const App = () => {
-  const showAlertFromAlert = () => {
-    const modalHandler = showCustomAlert(
+  const showAlertFromAlert = async () => {
+    const modalHandler = await showCustomAlert(
       'Alert',
       'This alert was triggered from another alert',
       [
@@ -28,8 +28,8 @@ const App = () => {
       <SafeAreaView style={styles.container}>
         <Button
           title="Show Modal"
-          onPress={() => {
-            const modalHandler = showCustomAlert(
+          onPress={async () => {
+            const modalHandler = await showCustomAlert(
               'Alert',
               'This is a custom alert triggered from the main screen',
               [
@@ -44,6 +44,50 @@ const App = () => {
                   },
                 },
               ],
+            );
+          }}
+        />
+        <Button
+          title="Enqueue 3 modals"
+          onPress={async () => {
+            const modalHandler = await showCustomAlert(
+              'Alert',
+              'This is an enqueued alert',
+              [
+                {
+                  title: 'Close',
+                  action: () => {
+                    modalHandler.dismiss();
+                  },
+                },
+              ],
+              true,
+            );
+            const secondModalHandler = await showCustomAlert(
+              'Alert',
+              'This is the second enqueued alert',
+              [
+                {
+                  title: 'Close',
+                  action: () => {
+                    secondModalHandler.dismiss();
+                  },
+                },
+              ],
+              true,
+            );
+            const thirdModalHandler = await showCustomAlert(
+              'Alert',
+              'This is the third enqueued alert',
+              [
+                {
+                  title: 'Close',
+                  action: () => {
+                    thirdModalHandler.dismiss();
+                  },
+                },
+              ],
+              true,
             );
           }}
         />

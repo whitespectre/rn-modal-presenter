@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, Text, Button} from 'react-native';
-import {ModalContentProps, showModal} from 'rn-modal-presenter';
+import {ModalContentProps, showModal, enqueueModal} from 'rn-modal-presenter';
 
 type CustomAlertButton = {
   title: string;
@@ -19,12 +19,21 @@ export const showCustomAlert = (
   title: string,
   body: string,
   buttons: CustomAlertButton[] = [defaultButton],
+  enqueue: boolean = false,
 ) => {
-  return showModal(CustomAlert, {
-    title,
-    body,
-    buttons,
-  } as CustomAlertProps);
+  if (enqueue) {
+    return enqueueModal(CustomAlert, {
+      title,
+      body,
+      buttons,
+    } as CustomAlertProps);
+  } else {
+    return showModal(CustomAlert, {
+      title,
+      body,
+      buttons,
+    } as CustomAlertProps);
+  }
 };
 
 const CustomAlert = ({
@@ -44,7 +53,7 @@ const CustomAlert = ({
               <View key={index} style={styles.button}>
                 <Button
                   title={button.title}
-                  onPress={button.action ?? dismiss}
+                  onPress={button.action ?? (() => dismiss())}
                 />
               </View>
             );
