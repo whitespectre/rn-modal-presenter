@@ -1,6 +1,6 @@
 {
   "name": "@whitespectre/rn-modal-presenter",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "A simple to use library to present modals on top of the app using Root Siblings.",
   "main": "./build/dist/index.js",
   "repository": "git@github.com:whitespectre/rn-modal-presenter.git",
