@@ -5,6 +5,7 @@ import React, {
   useRef,
   FC,
   PropsWithChildren,
+  useState,
 } from "react";
 import { Animated, StyleSheet, View, ViewProps } from "react-native";
 import RootSiblings, { RootSiblingParent } from "react-native-root-siblings";
@@ -172,6 +173,7 @@ export const enqueueModal = async <ContentProps,>(
 const ModalPresenter = forwardRef<ModalPresenterRef, ViewProps>(
   ({ style, children, ...props }, ref) => {
     const animatedOpacity = useRef(new Animated.Value(0));
+    const [dismissing, setDismissing] = useState(false);
 
     useEffect(() => {
       Animated.spring(animatedOpacity.current, {
@@ -182,6 +184,7 @@ const ModalPresenter = forwardRef<ModalPresenterRef, ViewProps>(
 
     useImperativeHandle(ref, () => ({
       animatedOut: (completion?: () => void) => {
+        setDismissing(true);
         Animated.spring(animatedOpacity.current, {
           toValue: 0,
           useNativeDriver: true,
@@ -192,7 +195,7 @@ const ModalPresenter = forwardRef<ModalPresenterRef, ViewProps>(
     }));
 
     return (
-      <View style={StyleSheet.absoluteFill}>
+      <View style={StyleSheet.absoluteFill} pointerEvents={dismissing ? 'none' : 'auto'}>
         <Animated.View
           style={[
             styles.container,
