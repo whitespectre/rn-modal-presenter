@@ -3,13 +3,13 @@
 Add the dependency:
 
 ```bash
-npm i rn-modal-presenter
+npm i @whitespectre/rn-modal-presenter
 ```
 
 or
 
 ```bash
-yarn add rn-modal-presenter
+yarn add @whitespectre/rn-modal-presenter
 ```
 
 # Usage
@@ -17,14 +17,14 @@ yarn add rn-modal-presenter
 To use this component you need to do two things:
 
 1. Import the `ModalPresenterParent` component and wrap your app with it
-2. "Modalize" your component, which is just creating a component that can be presented/dismissed by `rn-modal-presenter`
+2. "Modalize" your component, which is just creating a component that can be presented/dismissed by `@whitespectre/rn-modal-presenter`
 
 ## Preparing your app
 
 For the first step, you just need to wrap your entire app with the provided `ModalPresenterParent` component:
 
 ```jsx
-import { ModalPresenterParent } from "rn-modal-presenter";
+import { ModalPresenterParent } from "@whitespectre/rn-modal-presenter";
 ...
 <ModalPresenterParent>
   <App />
@@ -33,7 +33,7 @@ import { ModalPresenterParent } from "rn-modal-presenter";
 
 ## Creating Presentable components
 
-`rn-modal-presenter` provides a `showModal` function that can be used to present any modals. This function returns a `ModalHandler` that can be used to dismiss the modal later on. This approach allows a lot of flexibility (you can present simple components and dismiss them), so we'll cover a more complex example.
+`@whitespectre/rn-modal-presenter` provides a `showModal` function that can be used to present any modals. This function returns a `ModalHandler` that can be used to dismiss the modal later on. This approach allows a lot of flexibility (you can present simple components and dismiss them), so we'll cover a more complex example.
 
 Let's assume you want to present a customizable component that make use of some props, and this component might get dismissed from some external component or dismissed itself after some user action.
 
@@ -97,9 +97,9 @@ As you can see, the modal can later be dismissed by calling the `dismiss()` func
 
 ### Dismissing a modal
 
-We covered a way of dismissing a modal using the `ModalHandler`. But what if we want to dismiss the modal from the "Modalized" component itself? `rn-modal-presenter` also lets you do that.
+We covered a way of dismissing a modal using the `ModalHandler`. But what if we want to dismiss the modal from the "Modalized" component itself? `@whitespectre/rn-modal-presenter` also lets you do that.
 
-When a component is presented by `rn-modal-presenter`, it passes a new prop called `dismiss` (part of `ModalContentProps`), which is a function that can be used to dismiss the modal at any point.
+When a component is presented by `@whitespectre/rn-modal-presenter`, it passes a new prop called `dismiss` (part of `ModalContentProps`), which is a function that can be used to dismiss the modal at any point.
 
 This is how your modalized component would look like with the ability to dismiss itself.
 
@@ -184,4 +184,4 @@ to see it in action.
 
 ## License
 
-`rn-modal-presenter` is available under the MIT license. See the [LICENSE](LICENSE.md) file for more info.
+`@whitespectre/rn-modal-presenter` is available under the MIT license. See the [LICENSE](LICENSE.md) file for more info.
